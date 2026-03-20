@@ -22,6 +22,7 @@ while True:
     ret, frame = video.read()
     # if no break out of loop
     if not ret:
+        print("Error: video file not found")
         break
 
     # skipping frames for faster video processing : processing every 3rd frame
@@ -44,4 +45,4 @@ while True:
 video.release()
 cv2.destroyAllWindows()
 
-# testing khang-feature
+# khang-feature
