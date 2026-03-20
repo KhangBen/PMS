@@ -18,16 +18,16 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-deactivate venv environment
-```bash
-(venv) deactivate
-````
-
 #### Windows
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
+
+#### deactivate venv environment
+```bash
+(venv) deactivate
+````
 
 **3. Install Dependencies**
 ```bash
