@@ -5,8 +5,10 @@ This project uses YOLOv8 and OpenCV to detect and track vehicles in a parking lo
 ## Getting Started
 
 **1. Clone the Repository**
+```bash
 git clone https://github.com/KhangBen/PMS.git
 cd PMS
+```
 
 **2. Create Virtual Environment**
 
