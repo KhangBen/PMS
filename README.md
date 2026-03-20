@@ -1,5 +1,5 @@
 # Parking Management System (PMS)
-**Overview**
+## Overview
 This project uses YOLOv8 and OpenCV to detect and track vehicles in a parking lot video. 
 
 ## Getting Started
