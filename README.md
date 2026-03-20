@@ -14,17 +14,26 @@ cd PMS
 ```bash
 python3 -m venv venv
 source venv/bin/activate
+```
 
 deactivate venv environment
+```bash
 (venv) deactivate
+````
 
-**Windows**
+#### Windows
+```bash
 python -m venv venv
 venv\Scripts\activate
+```
 
 **3. Install Dependencies**
+```bash
 pip install -r requirements.txt
+```
 
 **4. Run the Program**
+```bash
 python src/main.py
+```
 
