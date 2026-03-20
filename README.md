@@ -10,8 +10,9 @@ cd PMS
 
 **2. Create Virtual Environment**
 
-**MacOS/Linux**
-python -m venv venv
+#### MacOS / Linux
+```bash
+python3 -m venv venv
 source venv/bin/activate
 
 deactivate venv environment
