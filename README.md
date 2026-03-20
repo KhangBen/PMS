@@ -1,25 +1,29 @@
 # Parking Management System (PMS)
+**Overview**
+This project uses YOLOv8 and OpenCV to detect and track vehicles in a parking lot video. 
 
 ## Getting Started
 
-initial startup
-python -m venv venv
+**1. Clone the Repository**
+git clone https://github.com/KhangBen/PMS.git
+cd PMS
 
-MacOS/Linux
-activate up venv environment
+**2. Create Virtual Environment**
+
+**MacOS/Linux**
+python -m venv venv
 source venv/bin/activate
 
 deactivate venv environment
 (venv) deactivate
 
-Windows
-activate venv environment
+**Windows**
+python -m venv venv
 venv\Scripts\activate
 
-download packages
+**3. Install Dependencies**
 pip install -r requirements.txt
 
-running cmd in terminal
-make sure in general directory
-python src/original_main.py
+**4. Run the Program**
+python src/main.py
 
