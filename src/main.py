@@ -20,7 +20,7 @@ frame_count = 0
 while True:
     # read frame
     ret, frame = video.read()
-    # if no break out of loop
+    # if not break out of loop
     if not ret:
         print("Error: video file not found")
         break
@@ -45,4 +45,4 @@ while True:
 video.release()
 cv2.destroyAllWindows()
 
-# khang-feature
+# khang-branch
