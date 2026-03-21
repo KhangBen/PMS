@@ -20,13 +20,10 @@ frame_count = 0
 while True:
     # read frame
     ret, frame = video.read()
-<<<<<<< HEAD
     h, w, _ = frame.shape
     # bottom half only for detection
     roi = frame[h//2:, :]
 
-=======
->>>>>>> 48ea0d1 (changes to main.py)
     # if not break out of loop
     if not ret:
         print("Error: video file not found")
@@ -52,8 +49,4 @@ while True:
 video.release()
 cv2.destroyAllWindows()
 
-<<<<<<< HEAD
-# khang-branch
-=======
 # main-branch
->>>>>>> 48ea0d1 (changes to main.py)
