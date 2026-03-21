@@ -1,5 +1,5 @@
 # Project GitHub Workflow Guide
-## Initial Setup (Do This First)
+## 1. Initial Setup (Do This First)
 
 #### Step 1: Clone the Repository**
 ```bash
@@ -27,7 +27,7 @@ git checkout -b ab-feature-name
 Examples:\
 git checkout -b kh-features\
 git checkout -b kh-parking-boundaries\
-git checkout -b kh-object-detection\
+git checkout -b kh-object-detection
 
 
 ## 3. Working on Your Code
@@ -49,7 +49,7 @@ git push -u origin ab-feature-name
 
 Examples:\
 git push -u origin kh-parking-boundaries\
-git push -u origin kh-object-detection\
+git push -u origin kh-object-detection
 
 After that:
 ```bash
