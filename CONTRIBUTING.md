@@ -62,7 +62,7 @@ Click "Compare & Pull Request"\
 Base: main\
 Compare: your branch\
 Add description of what you did\
-Submit PR\
+Submit PR
 
 **6. Keeping Your Branch Updated**\
 Before continuing work:
@@ -96,27 +96,27 @@ git push origin --delete ab-feature-name
 ```
 
 
-🚫 RULES (VERY IMPORTANT)\
+**🚫 RULES (VERY IMPORTANT)**\
 ❌ Do NOT push directly to main\
 ❌ Do NOT reuse old branches\
-❌ Do NOT commit random changes without messages\
+❌ Do NOT commit random changes without messages
 
-✅ BEST PRACTICES\
+**BEST PRACTICES**\
 ✔ 1 branch = 1 feature\
 ✔ Commit often (small changes)\
 ✔ Use clear commit messages\
-✔ Always pull before starting work\
+✔ Always pull before starting work
 
-🧠 Workflow Summary\
+**Workflow Summary**\
 main → create branch → work → commit → push → PR → merge → delete branch → repeat
 
 
-🎯 Goal\
+**Goal**\
 Keep the code:\
 Clean\
 Organized\
-Easy to collaborate on\
+Easy to collaborate on
 
-💬 If You’re Stuck\
+**If You’re Stuck**\
 Message me on discord and I can help 
 
