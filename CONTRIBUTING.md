@@ -24,47 +24,47 @@ Create a branch using your initials + feature name:
 git checkout -b ab-feature-name
 ```
 
-Examples:
-git checkout -b kh-features
-git checkout -b kh-parking-boundaries
-git checkout -b kh-object-detection
+Examples:\
+git checkout -b kh-features\
+git checkout -b kh-parking-boundaries\
+git checkout -b kh-object-detection\
 
 
-**3. Working on Your Code**
+**3. Working on Your Code**\
 Make changes → then save your progress:
 ```bash
 git add .
 git commit -m "Describe what you did"
 ```
 
-Example:
+Example:\
 git commit -m "Added ROI detection for bottom half of frame"
 
 
-**4. Push Your Branch to GitHub**
+**4. Push Your Branch to GitHub**\
 First time pushing:
 ```bash
 git push -u origin ab-feature-name
 ```
 
-Examples:
-git push -u origin kh-parking-boundaries
-git push -u origin kh-object-detection
+Examples:\
+git push -u origin kh-parking-boundaries\
+git push -u origin kh-object-detection\
 
 After that:
 ```bash
 git push
 ```
 
-**5. Creating a Pull Request (PR)**
-Go to GitHub
-Click "Compare & Pull Request"
-Base: main
-Compare: your branch
-Add description of what you did
-Submit PR
+**5. Creating a Pull Request (PR)**\
+Go to GitHub\
+Click "Compare & Pull Request"\
+Base: main\
+Compare: your branch\
+Add description of what you did\
+Submit PR\
 
-**6. Keeping Your Branch Updated**
+**6. Keeping Your Branch Updated**\
 Before continuing work:
 ```bash
 git checkout main
@@ -73,9 +73,9 @@ git checkout ab-feature-name
 git rebase main
 ```
 
-**7. Handling Conflicts**
-If conflicts happen:
-Fix code manually
+**7. Handling Conflicts**\
+If conflicts happen:\
+Fix code manually\
 Then:
 ```bash
 git add .
@@ -83,8 +83,8 @@ git rebase --continue
 ```
 
 
-**8. After PR is Merged**
-Delete your branch:
+**8. After PR is Merged**\
+Delete your branch:\
 Local:
 ```bash
 git branch -d ab-feature-name
@@ -96,27 +96,27 @@ git push origin --delete ab-feature-name
 ```
 
 
-🚫 RULES (VERY IMPORTANT)
-❌ Do NOT push directly to main
-❌ Do NOT reuse old branches
-❌ Do NOT commit random changes without messages
+🚫 RULES (VERY IMPORTANT)\
+❌ Do NOT push directly to main\
+❌ Do NOT reuse old branches\
+❌ Do NOT commit random changes without messages\
 
-✅ BEST PRACTICES
-✔ 1 branch = 1 feature
-✔ Commit often (small changes)
-✔ Use clear commit messages
-✔ Always pull before starting work
+✅ BEST PRACTICES\
+✔ 1 branch = 1 feature\
+✔ Commit often (small changes)\
+✔ Use clear commit messages\
+✔ Always pull before starting work\
 
-🧠 Workflow Summary
+🧠 Workflow Summary\
 main → create branch → work → commit → push → PR → merge → delete branch → repeat
 
 
-🎯 Goal
-Keep the code:
-Clean
-Organized
-Easy to collaborate on
+🎯 Goal\
+Keep the code:\
+Clean\
+Organized\
+Easy to collaborate on\
 
-💬 If You’re Stuck
+💬 If You’re Stuck\
 Message me on discord and I can help 
 
