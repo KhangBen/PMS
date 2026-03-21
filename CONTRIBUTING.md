@@ -17,7 +17,7 @@ git checkout main
 git pull origin main
 ```
 
-**2. Creating a New Branch (IMPORTANT)**\
+## 2. Creating a New Branch (IMPORTANT)
 ⚠️ NEVER work directly on main
 Create a branch using your initials + feature name:
 ```bash
@@ -30,7 +30,7 @@ git checkout -b kh-parking-boundaries\
 git checkout -b kh-object-detection\
 
 
-**3. Working on Your Code**\
+## 3. Working on Your Code
 Make changes → then save your progress:
 ```bash
 git add .
@@ -41,7 +41,7 @@ Example:\
 git commit -m "Added ROI detection for bottom half of frame"
 
 
-**4. Push Your Branch to GitHub**\
+## 4. Push Your Branch to GitHub
 First time pushing:
 ```bash
 git push -u origin ab-feature-name
@@ -56,7 +56,7 @@ After that:
 git push
 ```
 
-**5. Creating a Pull Request (PR)**\
+## 5. Creating a Pull Request (PR)
 Go to GitHub\
 Click "Compare & Pull Request"\
 Base: main\
@@ -64,7 +64,7 @@ Compare: your branch\
 Add description of what you did\
 Submit PR
 
-**6. Keeping Your Branch Updated**\
+## 6. Keeping Your Branch Updated
 Before continuing work:
 ```bash
 git checkout main
@@ -73,7 +73,7 @@ git checkout ab-feature-name
 git rebase main
 ```
 
-**7. Handling Conflicts**\
+## 7. Handling Conflicts
 If conflicts happen:\
 Fix code manually\
 Then:
@@ -83,7 +83,7 @@ git rebase --continue
 ```
 
 
-**8. After PR is Merged**\
+## 8. After PR is Merged
 Delete your branch:\
 Local:
 ```bash
