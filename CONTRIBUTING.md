@@ -17,7 +17,7 @@ git checkout main
 git pull origin main
 ```
 
-**2. Creating a New Branch (IMPORTANT)**
+**2. Creating a New Branch (IMPORTANT)**\
 ⚠️ NEVER work directly on main
 Create a branch using your initials + feature name:
 ```bash
