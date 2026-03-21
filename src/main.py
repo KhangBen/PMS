@@ -20,18 +20,22 @@ frame_count = 0
 while True:
     # read frame
     ret, frame = video.read()
+    h, w, _ = frame.shape
+    # bottom half only for detection
+    roi = frame[h//2:, :]
+
     # if not break out of loop
     if not ret:
         print("Error: video file not found")
         break
 
-    # skipping frames for faster video processing : processing every 3rd frame
+    # skipping frames for faster video processing : processing every n-th frame
     frame_count += 1
-    if frame_count % 3 != 0:
+    if frame_count % 2 != 0:
         continue
 
 
-    results = detector.detect(frame)
+    results = detector.detect(roi)
     frame = draw_boxes(frame, results)
 
     # Show Frame : opens window
