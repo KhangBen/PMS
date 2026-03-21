@@ -1,18 +1,18 @@
 # Project GitHub Workflow Guide
 ## 1. Initial Setup (Do This First)
 
-#### Step 1: Clone the Repository**
+#### Step 1: Clone the Repository
 ```bash
 git clone https://github.com/KhangBen/PMS.git
 cd PMS
 ```
 
-#### Step 2: Make Sure You’re on main**
+#### Step 2: Make Sure You’re on main
 ```bash
 git checkout main
 ```
 
-#### Step 3: Pull Latest Changes**
+#### Step 3: Pull Latest Changes
 ```bash
 git pull origin main
 ```
