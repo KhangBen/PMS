@@ -1,6 +1,3 @@
-import cv2
-import numpy as np
-
 # polyline drawing order : top-left -> top-right -> bottom-right -> bottom->left
 
 parking_spots = [
@@ -15,24 +12,6 @@ parking_spots = [
   [(1628, 897), (1741, 888), (1915, 1001), (1833, 1017)]    # spot 9
 ]
 
-def is_occupied(spot, cars):
-  # convert into numpy array
-  pts = np.array(spot, np.int32).reshape(-1, 1, 2)
-
-  for car in cars:
-    x1, y1, x2, y2 = car
-
-    # get the center point of car
-    cx = (x1 + x2) // 2
-    # cy = (y1 + y2) // 2
-    cy = int(y1 + 0.75 * (y2 - y1))
-
-    if cv2.pointPolygonTest(pts, (cx, cy), False) >= 0:
-      return True
-    
-  # make sure return false is OUTSIDE THE for loop (wasted 40 min of trying to debug)
-  # so it doesnt turn FALSE when checking other cars
-  return False
 
 
 

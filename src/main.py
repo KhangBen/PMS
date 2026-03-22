@@ -3,8 +3,9 @@ import cv2
 
 from detector import Detector
 from video import VideoReader
-from drawing import draw_boxes, draw_parking_spots
-from parking_spots import parking_spots, is_occupied
+from drawing import draw_boxes, draw_parking_spots, display_spots
+from parking_spots import parking_spots
+from parking_logic import is_occupied, count_open_spots
 
 # File Path Setup : picking video file
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -24,14 +25,15 @@ while True:
 
     # read frame
     ret, frame = video.read()
-    h, w, _ = frame.shape
-    # bottom half only for detection
-    roi = frame[h//2:, :]
 
     # if not break out of loop
     if not ret:
         print("Error: video file not found")
         break
+
+    h, w, _ = frame.shape
+    # bottom half only for detection
+    roi = frame[h//2:, :]
 
     # skipping frames for faster video processing : processing every n-th frame
     frame_count += 1
@@ -41,7 +43,7 @@ while True:
 
     results = detector.detect(roi)
 
-    offset_y = frame.shape[0] // 2 # fream height offset
+    offset_y = frame.shape[0] // 2 # frame height offset
 
     # getting car coordinates
     for box in results[0].boxes:
@@ -59,10 +61,13 @@ while True:
         # getting center of each car deteciton
         cv2.circle(frame, (cx, cy), 5, (255, 0, 0), 2) 
     
-
-
+    # display drawings on frame
     frame = draw_boxes(frame, results)
     frame = draw_parking_spots(frame, parking_spots, cars, is_occupied)
+
+    # display available spots counter
+    open_spots = count_open_spots(cars, parking_spots)
+    frame = display_spots(frame, open_spots, len(parking_spots))
 
     # Show Frame : opens window
     cv2.imshow("Detection", frame)
