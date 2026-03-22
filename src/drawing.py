@@ -69,12 +69,16 @@ def draw_parking_spots(frame, parking_spots, cars, is_occupied):
 
 def display_spots(frame, open_spots, total_spots):
    h, w, _ = frame.shape
-   cv2.putText(frame,
-               f"Available Parking Spots: {open_spots}/{total_spots}",
-               (w - 500, 50),
-               cv2.FONT_HERSHEY_SIMPLEX,
-               1,
-               (0, 100, 0),
-               2
-               )
+
+   cv2.putText(frame, f"Available Parking Spots: {open_spots}",
+               (w - 500, 50), cv2.FONT_HERSHEY_SIMPLEX,
+               1, (0, 100, 0), 2)
+   
+   cv2.putText(frame, f"Spaces Available: {open_spots}/{total_spots}",
+               (w - 500, 100), cv2.FONT_HERSHEY_SIMPLEX,
+               1, (0, 100, 0), 2)
+   
+   cv2.putText(frame, f"Max Occupancy: {total_spots}",
+               (w - 500, 150), cv2.FONT_HERSHEY_SIMPLEX,
+               1, (0, 100, 0), 2)
    return frame
