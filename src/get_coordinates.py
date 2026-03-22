@@ -6,7 +6,8 @@ import cv2
 # import sys
 
 from detector import Detector
-from parking_spots import parking_spots, is_occupied
+from parking_spots import parking_spots
+from parking_logic import is_occupied
 from drawing import draw_parking_spots
 
 points = []
@@ -28,17 +29,28 @@ def click_event(event, x, y, flags, param):
       points.append((x,y))
 
       with open(output_path, "a") as f:
-        f.write(f"({x}, {y})\n")
 
-      if len(points) % 4 == 0:
-        with open(output_path, "a") as f:
-            f.write("---- new parking spot ----\n")
+        # start if new parking lot
+        if len(points) % 4 == 1:
+          f.write('[')
+
+        # write point
+        f.write(f"({x}, {y})")
+      
+        # add comma between points
+        if len(points) % 4 != 0:
+          f.write(', ')
+
+        # end of parking spot
+        if len(points) % 4 == 0:
+          f.write('],\n')
+          # f.write("---- new parking spot ----\n")
 
 video = cv2.VideoCapture(video_path)
 
-
 # main loop : runs until quit
 while True:
+  cv2.waitKey(100)
   # car coordinates
   cars = []
   # read frame
@@ -65,14 +77,14 @@ while True:
     y2 += offset_y
     cars.append((x1, y1, x2, y2))
 
-  # get the center point of car
-  # cx = (x1 + x2) // 2
-  # cy = (y1 + y2) // 2
-  # getting 75% on y based on camera perspective
-  # cy = int(y1 + 0.75 * (y2 - y1)) 
+    # get the center point of car
+    cx = (x1 + x2) // 2
+    cy = (y1 + y2) // 2
+    # getting 75% on y based on camera perspective
+    cy = int(y1 + 0.75 * (y2 - y1)) 
 
-  # getting center of each car deteciton
-  # cv2.circle(frame, (cx, cy), 5, (255, 0, 0), 2) 
+    # getting center of each car deteciton
+    cv2.circle(frame, (cx, cy), 5, (255, 0, 0), 2) 
 
   frame = draw_parking_spots(frame, parking_spots, cars, is_occupied)
 

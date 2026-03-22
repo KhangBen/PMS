@@ -11,7 +11,7 @@ def draw_boxes(frame, results):
         for box in result.boxes:
             # confidence filter
             conf = float(box.conf[0])
-            if conf < 0.2:
+            if conf < 0.15:
                 continue
 
             # class + confidence
@@ -31,16 +31,16 @@ def draw_boxes(frame, results):
 
             color = (255, 255, 255)
 
-            # draw rectangles : (frame, start, end, color, thickness)
-            cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
-            # draw text 
-            cv2.putText(frame,
-                        f"{class_name} {conf:.2f}",
-                        (x1, max(y1 - 10, 20)),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.6,
-                        color,
-                        2)
+            # # draw rectangles : (frame, start, end, color, thickness)
+            # cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
+            # # draw text 
+            # cv2.putText(frame,
+            #             f"{class_name} {conf:.2f}",
+            #             (x1, max(y1 - 10, 20)),
+            #             cv2.FONT_HERSHEY_SIMPLEX,
+            #             0.6,
+            #             color,
+            #             2)
 
     return frame
 
