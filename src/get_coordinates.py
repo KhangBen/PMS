@@ -1,6 +1,6 @@
 import os
 import cv2
-import sys
+# import sys
 
 points = []
 

@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 # draw boxes funciton
 def draw_boxes(frame, results):
@@ -28,7 +29,7 @@ def draw_boxes(frame, results):
             y1 += y_offset
             y2 += y_offset
 
-            color = (0, 255, 0)
+            color = (255, 255, 255)
 
             # draw rectangles : (frame, start, end, color, thickness)
             cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
@@ -42,3 +43,25 @@ def draw_boxes(frame, results):
                         2)
 
     return frame
+
+def draw_parking_spots(frame, parking_spots, cars, is_occupied):
+  for spot in parking_spots:
+    # convert into numpy array
+    pts = np.array(spot, np.int32).reshape(-1, 1, 2)
+    # reshape the array : 
+    # -1 -> automatically figure out # of points
+    # 1 -> required dimension for OpenCV
+    # 2 -> (x,y)
+    # pts = pts.reshape(-1, 1, 2)
+
+    occupied = is_occupied(spot, cars)
+    
+
+    if occupied:
+       color = (0, 0, 255)  # red
+    else:
+       color = (0, 255, 0) # green
+
+    cv2.polylines(frame, [pts], True, color, 2)
+
+  return frame

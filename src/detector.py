@@ -5,4 +5,6 @@ class Detector:
         self.model = YOLO(model_path)
 
     def detect(self, frame):
-        return self.model(frame)
+        # return self.model(frame)
+        return self.model(frame, verbose=False) # turns off logs
+        
