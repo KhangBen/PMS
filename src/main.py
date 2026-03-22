@@ -43,23 +43,30 @@ while True:
 
     results = detector.detect(roi)
 
-    offset_y = frame.shape[0] // 2 # frame height offset
+    # frame height offset
+    offset_y = frame.shape[0] // 2
 
     # getting car coordinates
     for box in results[0].boxes:
         x1, y1, x2, y2 = map(int, box.xyxy[0])
         y1 += offset_y
         y2 += offset_y
-        cars.append((x1, y1, x2, y2))
 
-        # get the center point of car
-        cx = (x1 + x2) // 2
-        # cy = (y1 + y2) // 2
-        # getting 75% on y based on camera perspective
-        cy = int(y1 + 0.75 * (y2 - y1)) 
+        # get class info
+        cls = int(box.cls[0])
+        class_name = results[0].names[cls]
 
-        # getting center of each car deteciton
-        cv2.circle(frame, (cx, cy), 5, (255, 0, 0), 2) 
+        # only process cars and trucks
+        if class_name in ["car", "truck"]:
+            cars.append((x1, y1, x2, y2))
+
+            # get the center point of car
+            cx = (x1 + x2) // 2
+            # getting 75% on y based on camera perspective
+            cy = int(y1 + 0.75 * (y2 - y1)) 
+
+            # getting point of each car deteciton
+            cv2.circle(frame, (cx, cy), 5, (255, 0, 0), 2) 
     
     # display drawings on frame
     frame = draw_boxes(frame, results)
