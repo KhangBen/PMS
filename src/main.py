@@ -35,7 +35,7 @@ while True:
     # bottom half only for detection
     roi = frame[h//2:, :]
 
-    # skipping frames for faster video processing : processing every n-th frame
+    # skipping frames for faster video processing : processing every 2nd frame
     frame_count += 1
     if frame_count % 2 != 0:
         continue

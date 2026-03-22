@@ -1,3 +1,6 @@
+# Purpose: getting coordinates for parking boundaries 
+# python3 src/get_coordinates.py
+
 import os
 import cv2
 # import sys
