@@ -12,5 +12,5 @@ class Detector:
 #yolov8n.pt :   nano        smallest    fastest       lowest
 #yolov8s.pt :   small       small       very fast     good
 #yolov8m.pt :   medium      medium      fast          better
-#yolov8l.pt :   large       large       moderate      high                  (before)
+#yolov8l.pt :   large       large       moderate      high                  (current)
 #yolov8x.pt :   largest     largest     slow          highest

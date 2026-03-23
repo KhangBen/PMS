@@ -76,6 +76,13 @@ while True:
     open_spots = count_open_spots(cars, parking_spots)
     frame = display_spots(frame, open_spots, len(parking_spots))
 
+    # debugging spot timer
+    # spot_index = 19
+    # print(f"Spot: {spot_index + 1} "
+    #       f"counter = {parking_spots[spot_index]['counter']}, "
+    #        f"occupied = {parking_spots[spot_index]['occupied']} ")
+
+
     # Show Frame : opens window
     cv2.imshow("Detection", frame)
 

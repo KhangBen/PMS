@@ -47,7 +47,7 @@ def draw_boxes(frame, results):
 def draw_parking_spots(frame, parking_spots, cars, is_occupied):
   for spot in parking_spots:
     # convert into numpy array
-    pts = np.array(spot, np.int32).reshape(-1, 1, 2)
+    pts = np.array(spot["polygon"], np.int32).reshape(-1, 1, 2)
     # reshape the array : 
     # -1 -> automatically figure out # of points
     # 1 -> required dimension for OpenCV
