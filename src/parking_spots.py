@@ -250,6 +250,13 @@ parking_spots = [
     "last_seen": 0,
     "occupied": False
   }
+  #,
+  # {
+  #   "polygon": [(1641, 627), (1727, 620), (1821, 645), (1718, 658)],
+  #   "counter": 0,
+  #   "last_seen": 0,
+  #   "occupied": False
+  # }
 
 ]
 
