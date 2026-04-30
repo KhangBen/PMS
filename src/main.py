@@ -1,5 +1,8 @@
 import os
 import cv2
+import json
+import subprocess
+import sys
 
 from detector import Detector
 from video import VideoReader
@@ -17,6 +20,10 @@ video = VideoReader(video_path)
 
 # frame counter
 frame_count = 0
+
+# launch dashboard script
+dashboard_path = os.path.join(os.path.dirname(__file__), "dashboard.py")
+subprocess.Popen([sys.executable, dashboard_path])
 
 # main loop : runs until quit
 while True:
@@ -76,6 +83,21 @@ while True:
     open_spots = count_open_spots(cars, parking_spots)
     frame = display_spots(frame, open_spots, len(parking_spots))
 
+    # Structure for data for future UI
+    parking_data = {
+        "system_active": True,
+        "available" : open_spots,
+        "total": len(parking_spots),
+        "spot_statuses": [spot["occupied"] for spot in parking_spots]
+    }
+
+    # Create the path to the root directory PMS/
+    
+
+    # write this to a json file
+    with open("lot_status.json", "w") as f:
+        json.dump(parking_data, f)
+
     # debugging spot timer
     # spot_index = 19
     # print(f"Spot: {spot_index + 1} "
@@ -88,6 +110,9 @@ while True:
 
     # quitting program
     if cv2.waitKey(1) & 0xFF == ord('q'):
+        parking_data["system_active"] = False
+        with open("lot_status.json", "w") as f:
+            json.dump(parking_data, f)
         break
 
 
