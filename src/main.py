@@ -1,7 +1,7 @@
 import os
 import cv2
 import json
-import subprocess
+# import subprocess
 import sys
 
 from detector import Detector
@@ -21,9 +21,12 @@ video = VideoReader(video_path)
 # frame counter
 frame_count = 0
 
-# launch dashboard script
+# launch dashboard script (old)
+'''
 dashboard_path = os.path.join(os.path.dirname(__file__), "dashboard.py")
 subprocess.Popen([sys.executable, dashboard_path])
+'''
+
 
 # main loop : runs until quit
 while True:

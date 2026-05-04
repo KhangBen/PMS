@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PMS Parking Map</title>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+        }
+
+        .map-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .map {
+            width: 1200px;   /* display size */
+            display: block;
+        }
+
+        #spots {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .spot {
+            position: absolute;
+            width: 44px;
+            height: 94px;
+            border-radius: 5px;
+            opacity: 0.8;
+        }
+
+        .free { background: green; }
+        .taken { background: red; }
+
+        #rowCounts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* prevents blocking clicks */
+        }
+    </style>
+</head>
+
+<body>
+
+<h2 id="status">Loading...</h2>
+
+<div style="margin-bottom: 15px;">
+    <span style="color: green; font-weight: bold;" >■ Available</span>
+    <span style="color:red; margin-left:20px; font-weight: bold;" >■ Occupied</span>
+</div>
+
+<div class="map-container">
+    <img src="{{ url_for('static', filename='background.png') }}" class="map">
+    <div id="spots"></div>
+    <div id="rowCounts"></div>
+</div>
+
+<script>
+
+// original image size : background.png
+const ORIGINAL_WIDTH = 1940;
+const ORIGINAL_HEIGHT = 1380;
+
+// html display size
+const DISPLAY_WIDTH = 1200;
+
+// compute scale
+const scale = DISPLAY_WIDTH / ORIGINAL_WIDTH;
+
+
+// parking spots coordinates from background.png
+const positions = [
+    // top row: spots 1 - 10
+    {x: 129, y: 353},       // spot 1
+    {x: 209, y: 353},       // spot 2
+    {x: 289, y: 353},       // spot 3
+    {x: 369, y: 353},       // spot 4
+    {x: 449, y: 353},       // spot 5
+    {x: 529, y: 353},       // spot 6
+    {x: 609, y: 353},       // spot 7
+    {x: 689, y: 353},       // spot 8
+    {x: 769, y: 353},       // spot 9
+    {x: 849, y: 353},       // spot 10
+
+
+    //  second row: spots 11 - 21
+    {x: 113, y: 671},       // spot 11
+    {x: 194, y: 671},       // spot 12
+    {x: 275, y: 671},       // spot 13
+    {x: 353, y: 671},       // spot 14
+    {x: 429, y: 671},       // spot 15
+    {x: 509, y: 671},       // spot 16
+    {x: 589, y: 671},       // spot 17
+    {x: 669, y: 671},       // spot 18
+    {x: 749, y: 671},       // spot 19
+    {x: 830, y: 671},       // spot 20
+    {x: 908, y: 671},       // spot 21
+
+        // second row: spots 22 - 33
+    {x: 113, y: 834},       // spot 22
+    {x: 194, y: 834},       // spot 23
+    {x: 275, y: 834},       // spot 24
+    {x: 353, y: 834},       // spot 25
+    {x: 429, y: 834},       // spot 26
+    {x: 509, y: 834},       // spot 27
+    {x: 589, y: 834},       // spot 28
+    {x: 669, y: 834},       // spot 29
+    {x: 749, y: 834},       // spot 30
+    {x: 830, y: 834},       // spot 31
+    {x: 908, y: 834},       // spot 32
+
+       // second row: spots 33 - 41
+    {x: 129, y: 1151},       // spot 33
+    {x: 209, y: 1151},       // spot 34
+    {x: 289, y: 1151},       // spot 35
+    {x: 369, y: 1151},       // spot 36
+    {x: 449, y: 1151},       // spot 37
+    {x: 529, y: 1151},       // spot 38
+    {x: 609, y: 1151},       // spot 39
+    {x: 689, y: 1151},       // spot 40
+    {x: 769, y: 1151},       // spot 41
+
+];
+
+const rows = [
+    [0,1,2,3,4,5,6,7,8,9],                  // row 1
+    [10,11,12,13,14,15,16,17,18,19,20],     // row 2
+    [21,22,23,24,25,26,27,28,29,30,31],     // row 3
+    [32,33,34,35,36,37,38,39,40]         // row 4
+];
+
+// live update 
+async function update() {
+    // fethcing data
+    const res = await fetch("/data");
+    const data = await res.json();
+
+    // row counter
+    const rowContainer = document.getElementById("rowCounts");
+    rowContainer.innerHTML = "";
+
+    rows.forEach((row, index) => {
+        let available = 0;
+
+        row.forEach(i => {
+            if (!data.spot_statuses[i]) available++;
+        });
+
+        const div = document.createElement("div");
+        div.innerText = `Row ${index + 1}\n${available} / ${row.length}`;
+        div.style.whiteSpace = "pre-line";
+
+
+        div.style.position = "absolute";
+        div.style.color = "black";
+        div.style.fontWeight = "bold";
+        div.style.fontSize = "25px";
+
+        const rowLabelPositions = [
+            {x: 1600, y: 350},  // Row 1 (top)
+            {x: 1600, y: 650},  // Row 2
+            {x: 1600, y: 850},  // Row 3
+            {x: 1600, y: 1150}  // Row 4 (bottom)
+        ];
+
+        const pos = rowLabelPositions[index];
+
+        div.style.left = (pos.x * scale) + "px";
+        div.style.top  = (pos.y * scale) + "px";
+
+        rowContainer.appendChild(div);
+    });
+
+    // update text
+    document.getElementById("status").innerText =
+        `Available: ${data.available} / ${data.total}`;
+
+    const container = document.getElementById("spots");
+    container.innerHTML = "";
+
+    // loop through spots
+    data.spot_statuses.forEach((occupied, i) => {
+        if (!positions[i]) return;
+
+        const div = document.createElement("div");
+
+        div.className = "spot " + (occupied ? "taken" : "free");
+
+        // scaling of parking spots
+        div.style.left = (positions[i].x * scale - 15) + "px";
+        div.style.top  = (positions[i].y * scale - 30) + "px";
+
+        // individual parking spot id
+        // NOTE: could move this to admin view
+        div.innerText = "P" + (i + 1);
+        div.style.color = "white";
+        div.style.fontSize = "15px";
+        div.style.textAlign = "center";
+        div.style.lineHeight = "90px";
+
+        container.appendChild(div);
+    });
+}
+
+setInterval(update, 2000);
+update();
+
+</script>
+
+</body>
+</html>
