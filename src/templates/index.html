@@ -140,75 +140,83 @@ const rows = [
 
 // live update 
 async function update() {
-    // fethcing data
-    const res = await fetch("/data");
-    const data = await res.json();
 
-    // row counter
-    const rowContainer = document.getElementById("rowCounts");
-    rowContainer.innerHTML = "";
+    try {
+        const res = await fetch("/data");
+        const data = await res.json();
 
-    rows.forEach((row, index) => {
-        let available = 0;
+        if (!data.system_active) {
+            document.getElementById("status").innerText = "System Offline";
 
-        row.forEach(i => {
-            if (!data.spot_statuses[i]) available++;
+            document.getElementById("spots").innerHTML = "";
+            document.getElementById("rowCounts").innerHTML = "";
+
+            return;
+        }
+
+        // row counter
+        const rowContainer = document.getElementById("rowCounts");
+        rowContainer.innerHTML = "";
+
+        rows.forEach((row, index) => {
+            let available = 0;
+
+            row.forEach(i => {
+                if (!data.spot_statuses[i]) available++;
+            });
+
+            const div = document.createElement("div");
+            div.innerText = `Row ${index + 1}\n${available} / ${row.length}`;
+            div.style.whiteSpace = "pre-line";
+
+            div.style.position = "absolute";
+            div.style.color = "black";
+            div.style.fontWeight = "bold";
+            div.style.fontSize = "25px";
+
+            const rowLabelPositions = [
+                {x: 1600, y: 350},
+                {x: 1600, y: 650},
+                {x: 1600, y: 850},
+                {x: 1600, y: 1150}
+            ];
+
+            const pos = rowLabelPositions[index];
+
+            div.style.left = (pos.x * scale) + "px";
+            div.style.top  = (pos.y * scale) + "px";
+
+            rowContainer.appendChild(div);
         });
 
-        const div = document.createElement("div");
-        div.innerText = `Row ${index + 1}\n${available} / ${row.length}`;
-        div.style.whiteSpace = "pre-line";
+        document.getElementById("status").innerText =
+            `Available: ${data.available} / ${data.total}`;
 
+        const container = document.getElementById("spots");
+        container.innerHTML = "";
 
-        div.style.position = "absolute";
-        div.style.color = "black";
-        div.style.fontWeight = "bold";
-        div.style.fontSize = "25px";
+        data.spot_statuses.forEach((occupied, i) => {
+            if (!positions[i]) return;
 
-        const rowLabelPositions = [
-            {x: 1600, y: 350},  // Row 1 (top)
-            {x: 1600, y: 650},  // Row 2
-            {x: 1600, y: 850},  // Row 3
-            {x: 1600, y: 1150}  // Row 4 (bottom)
-        ];
+            const div = document.createElement("div");
 
-        const pos = rowLabelPositions[index];
+            div.className = "spot " + (occupied ? "taken" : "free");
 
-        div.style.left = (pos.x * scale) + "px";
-        div.style.top  = (pos.y * scale) + "px";
+            div.style.left = (positions[i].x * scale - 15) + "px";
+            div.style.top  = (positions[i].y * scale - 30) + "px";
 
-        rowContainer.appendChild(div);
-    });
+            div.innerText = "P" + (i + 1);
+            div.style.color = "white";
+            div.style.fontSize = "15px";
+            div.style.textAlign = "center";
+            div.style.lineHeight = "90px";
 
-    // update text
-    document.getElementById("status").innerText =
-        `Available: ${data.available} / ${data.total}`;
+            container.appendChild(div);
+        });
 
-    const container = document.getElementById("spots");
-    container.innerHTML = "";
-
-    // loop through spots
-    data.spot_statuses.forEach((occupied, i) => {
-        if (!positions[i]) return;
-
-        const div = document.createElement("div");
-
-        div.className = "spot " + (occupied ? "taken" : "free");
-
-        // scaling of parking spots
-        div.style.left = (positions[i].x * scale - 15) + "px";
-        div.style.top  = (positions[i].y * scale - 30) + "px";
-
-        // individual parking spot id
-        // NOTE: could move this to admin view
-        div.innerText = "P" + (i + 1);
-        div.style.color = "white";
-        div.style.fontSize = "15px";
-        div.style.textAlign = "center";
-        div.style.lineHeight = "90px";
-
-        container.appendChild(div);
-    });
+    } catch (err) {
+        console.error("UPDATE ERROR:", err);
+    }
 }
 
 setInterval(update, 2000);

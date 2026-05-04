@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify
 import json
 import os
+import time
 
 app = Flask(__name__)
 
@@ -8,21 +9,27 @@ app = Flask(__name__)
 def index():
   return render_template("index.html")
 
-# File Path Setup : picking video file
+# JSON file path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-video_path = os.path.join(BASE_DIR, "..", "lot_status.json")
+JSON_PATH = os.path.join(BASE_DIR, "..", "lot_status.json")
 
 @app.route("/data")
 def data():
-    print("DATA ROUTE HIT")   # 👈 ADD THIS
+    print("DATA ROUTE HIT") 
 
-    if os.path.exists(video_path):
-        print("FILE FOUND")   # 👈 ADD THIS
-        with open(video_path, "r") as f:
+    if os.path.exists(JSON_PATH):
+        print("FILE FOUND") 
+        with open(JSON_PATH, "r") as f:
             return jsonify(json.load(f))
 
-    print("FILE NOT FOUND")   # 👈 ADD THIS
-    return jsonify({"available": 0, "total": 0, "spot_statuses": []})
+    # fallbacl (offline system)
+    return jsonify({
+        "available": 0,
+        "total": 41,
+        "spot_statuses": [False] * 41,
+        "system_active": False,
+        "last_updated": time.time()
+    })
 
 if __name__ == "__main__":
     app.run(debug=True)

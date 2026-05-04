@@ -3,6 +3,7 @@ import cv2
 import json
 # import subprocess
 import sys
+import time
 
 from detector import Detector
 from video import VideoReader
@@ -13,6 +14,21 @@ from parking_logic import is_occupied, count_open_spots
 # File Path Setup : picking video file
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 video_path = os.path.join(BASE_DIR, "..", "data", "example3.mp4")
+
+# jason file
+JSON_PATH = os.path.join(BASE_DIR, "..", "lot_status.json")
+if os.path.exists(JSON_PATH):
+    os.remove(JSON_PATH)
+
+# initialize offline state before loop
+with open(JSON_PATH, "w") as f:
+    json.dump({
+        "available": 0,
+        "total": len(parking_spots),
+        "spot_statuses": [False] * len(parking_spots),
+        "system_active": False,
+        "last_updated": time.time()
+    }, f)
 
 # constructors
 detector = Detector()
@@ -30,15 +46,23 @@ subprocess.Popen([sys.executable, dashboard_path])
 
 # main loop : runs until quit
 while True:
-    # car coordinates
-    cars = []
-
     # read frame
     ret, frame = video.read()
 
     # if not break out of loop
     if not ret:
-        print("Error: video file not found")
+        print("Video ended")
+
+        parking_data = {
+            "available": count_open_spots(cars, parking_spots),
+            "total": len(parking_spots),
+            "spot_statuses": [spot["occupied"] for spot in parking_spots],
+            "system_active": False
+        }
+
+        with open(JSON_PATH, "w") as f:
+            json.dump(parking_data, f)
+
         break
 
     h, w, _ = frame.shape
@@ -50,11 +74,17 @@ while True:
     if frame_count % 2 != 0:
         continue
 
+    # car coordinates
+    cars = []
 
     results = detector.detect(roi)
 
     # frame height offset
     offset_y = frame.shape[0] // 2
+
+    
+    if not results or not hasattr(results[0], "boxes"):
+        continue
 
     # getting car coordinates
     for box in results[0].boxes:
@@ -88,17 +118,17 @@ while True:
 
     # Structure for data for future UI
     parking_data = {
-        "system_active": True,
         "available" : open_spots,
         "total": len(parking_spots),
-        "spot_statuses": [spot["occupied"] for spot in parking_spots]
+        "spot_statuses": [spot["occupied"] for spot in parking_spots],
+        "system_active": True
     }
 
     # Create the path to the root directory PMS/
     
 
     # write this to a json file
-    with open("lot_status.json", "w") as f:
+    with open(JSON_PATH, "w") as f:
         json.dump(parking_data, f)
 
     # debugging spot timer
@@ -114,7 +144,7 @@ while True:
     # quitting program
     if cv2.waitKey(1) & 0xFF == ord('q'):
         parking_data["system_active"] = False
-        with open("lot_status.json", "w") as f:
+        with open(JSON_PATH, "w") as f:
             json.dump(parking_data, f)
         break
 
