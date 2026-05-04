@@ -142,9 +142,25 @@ const rows = [
 async function update() {
 
     try {
+        // fetch data
         const res = await fetch("/data");
         const data = await res.json();
 
+        // compute time delay
+        const now = Date.now() / 1000;
+        const delay = now - data.last_updated;
+
+        // stale check
+        if (!data.last_updated || delay > 5) {
+            document.getElementById("status").innerText = "System Disconnected";
+
+            document.getElementById("spots").innerHTML = "";
+            document.getElementById("rowCounts").innerHTML = "";
+
+            return;
+        }
+
+        // system active check
         if (!data.system_active) {
             document.getElementById("status").innerText = "System Offline";
 
@@ -158,6 +174,7 @@ async function update() {
         const rowContainer = document.getElementById("rowCounts");
         rowContainer.innerHTML = "";
 
+        // normal UI rendering 
         rows.forEach((row, index) => {
             let available = 0;
 

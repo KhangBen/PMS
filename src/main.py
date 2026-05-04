@@ -54,10 +54,11 @@ while True:
         print("Video ended")
 
         parking_data = {
-            "available": count_open_spots(cars, parking_spots),
+            "available": 0,
             "total": len(parking_spots),
-            "spot_statuses": [spot["occupied"] for spot in parking_spots],
-            "system_active": False
+            "spot_statuses": [False] * len(parking_spots),
+            "system_active": False,
+            "last_updated": time.time()
         }
 
         with open(JSON_PATH, "w") as f:
@@ -121,7 +122,8 @@ while True:
         "available" : open_spots,
         "total": len(parking_spots),
         "spot_statuses": [spot["occupied"] for spot in parking_spots],
-        "system_active": True
+        "system_active": True,
+        "last_updated": time.time()
     }
 
     # Create the path to the root directory PMS/

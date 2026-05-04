@@ -22,7 +22,7 @@ def data():
         with open(JSON_PATH, "r") as f:
             return jsonify(json.load(f))
 
-    # fallbacl (offline system)
+    # fallback (offline system)
     return jsonify({
         "available": 0,
         "total": 41,
