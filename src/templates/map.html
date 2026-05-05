@@ -46,10 +46,40 @@
             height: 100%;
             pointer-events: none; /* prevents blocking clicks */
         }
+
+        .nav {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+        }
+
+        .nav button {
+            width: 120px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .nav button:hover {
+            background: #eee;
+        }
+
+        .nav button.active {
+            background: black;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
+
+<div class="nav">
+    <button onclick="location.href='/'">List View</button>
+    <button onclick="location.href='/map'">Map View</button>
+</div>
 
 <h2 id="status">Loading...</h2>
 

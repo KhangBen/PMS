@@ -6,8 +6,12 @@ import time
 app = Flask(__name__)
 
 @app.route("/")
-def index():
-  return render_template("index.html")
+def list_view():
+    return render_template("list.html")
+
+@app.route("/map")
+def map_view():
+    return render_template("map.html")
 
 # JSON file path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
