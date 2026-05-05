@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 import json
 import os
 import time
@@ -11,7 +11,8 @@ def list_view():
 
 @app.route("/map")
 def map_view():
-    return render_template("map.html")
+    lot = request.args.get("lot", "main")  # default = main
+    return render_template("map.html", lot=lot)
 
 # JSON file path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

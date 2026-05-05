@@ -124,7 +124,9 @@ async function updateTable() {
 
           const row = `
               <tr>
-                  <td>Main Lot</td>
+                  <td>
+                      <a href="/map?lot=main">Main Lot</a>
+                  </td>
                   <td>-- / --</td>
                   <td>
                       <div class="percent-bar">
@@ -149,7 +151,9 @@ async function updateTable() {
 
         const row = `
             <tr>
-                <td>Main Lot</td>
+                <td>
+                    <a href="/map?lot=main">Main Lot</a>
+                </td>
                 <td>${data.available} / ${data.total}</td>
                 <td>
                     <div class="percent-bar">
