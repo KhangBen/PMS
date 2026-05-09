@@ -35,7 +35,13 @@ pip install -r requirements.txt
 ```
 
 **4. Run the Program**
+#### Windows
 ```bash
 python src/main.py
+```
+
+#### MacOS / Linux
+```bash
+python3 src/main.py
 ```
 
