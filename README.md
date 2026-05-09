@@ -34,14 +34,14 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-**4. Run the Program**
+**4. Run the Program**  
 This system requires running **two components at the same time**:
-- the detection system ('main.py)
-- the web server ('app.py)
+- the detection system ('main.py')
+- the web server ('app.py')
 
 ---
 
-#### Step 4.1 – Start Detection System 
+#### 4.1 – Start Detection System 
 
 ### Windows
 ```bash
@@ -53,7 +53,7 @@ python src/main.py
 python3 src/main.py
 ```
 
-#### Step 4.2 – Start Web Server (in a new terminal/cmd)
+#### 4.2 – Start Web Server (in a new terminal/cmd)
 Open a **second terminal window** and run:
 
 ### Windows
@@ -66,7 +66,7 @@ python src/app.py
 python3 src/app.py
 ```
 
-#### Step 4.3 – Open the Application
+#### 4.3 – Open the Application
 Go to the following URL in your browser:
 ```bash
 http://127.0.0.1:5000/
