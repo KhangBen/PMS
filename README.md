@@ -38,7 +38,7 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-#### deactivate venv environment
+> Note: To exit the virtual environment at any time, run:  
 ```bash
 (venv) deactivate
 ````
