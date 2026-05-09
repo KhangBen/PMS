@@ -1,6 +1,20 @@
 # Parking Management System (PMS)
+
 ## Overview
-This project uses YOLOv8 and OpenCV to detect and track vehicles in a parking lot video. 
+This project uses YOLOv8 and OpenCV to detect and track vehicles in a parking lot video.  
+It determines parking spot occupancy and displays availability through a web-based dashboard.
+
+---
+
+## Features
+- Vehicle detection using YOLOv8  
+- Parking spot occupancy detection  
+- Real-time data updates (via JSON)  
+- Map view with visual parking layout  
+- List view with availability and occupancy percentage  
+- System status indicator (Active / Offline)  
+
+---
 
 ## Getting Started
 
@@ -72,6 +86,43 @@ Go to the following URL in your browser:
 http://127.0.0.1:5000/
 ```
 
+#### Usage
+#### List View  
+- Display total spaces available  
+- Shows percentage of occupancy  
+- Includes sustem status and last updated time  
+
+#### Map Voew
+- Visual layout of parking spots  
+- Green = available 
+- Red = occupied  
+- Each spot labeled (P1,P2, etc.)  
+
+---
+
+#### Known Limitations  
+- Uses pre-recorded video instead of live camera feed  
+- Detection accuracy depends on camera angle  
+- JSON is used instead of a database (for simplicity)  
+- Currently support a single parking lot  
+
+---
+
+#### Future Improvements  
+- Live camera integration  
+- Multi-lot support  
+- Database integration  
+- Mobile-friendly UI  
+- Improved detection accuracy  
+
+---
+
+#### Technologies Used  
+- Python  
+- OpenCV  
+- YOLOv8 (Ultralytics)  
+- Flask  
+- HTML / CSS / JavaScript  
 
 
 
