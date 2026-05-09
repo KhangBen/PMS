@@ -26,16 +26,16 @@ cd PMS
 
 **2. Create Virtual Environment**
 
-#### MacOS / Linux
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
 #### Windows
 ```bash
 python -m venv venv
 venv\Scripts\activate
+```
+
+#### MacOS / Linux
+```bash
+python3 -m venv venv
+source venv/bin/activate
 ```
 
 #### deactivate venv environment
@@ -53,11 +53,9 @@ This system requires running **two components at the same time**:
 - the detection system ('main.py')
 - the web server ('app.py')
 
----
-
 #### 4.1 – Start Detection System 
 
-### Windows
+#### Windows
 ```bash
 python src/main.py
 ```
@@ -70,7 +68,7 @@ python3 src/main.py
 #### 4.2 – Start Web Server (in a new terminal/cmd)
 Open a **second terminal window** and run:
 
-### Windows
+#### Windows
 ```bash
 python src/app.py
 ```
@@ -85,6 +83,9 @@ Go to the following URL in your browser:
 ```bash
 http://127.0.0.1:5000/
 ```
+> Note: The detection system (`main.py`) must also be running for live updates.
+
+---
 
 #### Usage
 #### List View  
@@ -92,7 +93,7 @@ http://127.0.0.1:5000/
 - Shows percentage of occupancy  
 - Includes sustem status and last updated time  
 
-#### Map Voew
+#### Map View
 - Visual layout of parking spots  
 - Green = available 
 - Red = occupied  
@@ -124,5 +125,24 @@ http://127.0.0.1:5000/
 - Flask  
 - HTML / CSS / JavaScript  
 
+---
 
+## Troubleshoting
+
+### Reset localhost connection (Chrome)  
+If the UI is not updated or appears stuck, you may need to clear Chrome socket connections:  
+
+1. Go to:  
+```bash
+chrome://net-internals/#sockets
+```
+
+2. Click:  
+- "Flush socket pools"  
+
+3. Retry:
+```bash
+http://127.0.0.1:5000/
+```
+> Note: The detection system (`main.py`) must also be running for live updates.
 
