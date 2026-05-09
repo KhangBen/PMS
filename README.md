@@ -14,6 +14,12 @@ It determines parking spot occupancy and displays availability through a web-bas
 - List view with availability and occupancy percentage  
 - System status indicator (Active / Offline)  
 
+## Requirements
+- Python 3.10+  
+- OpenCV  
+- Ultralytics YOLOv8  
+- Flask  
+
 ---
 
 ## Getting Started
