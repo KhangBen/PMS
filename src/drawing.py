@@ -31,7 +31,8 @@ def draw_boxes(frame, results):
 
             color = (255, 255, 255)
 
-            # # draw rectangles : (frame, start, end, color, thickness)
+            # # draw rectan
+            # gles : (frame, start, end, color, thickness)
             # cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
             # # draw text 
             # cv2.putText(frame,

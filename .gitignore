@@ -7,4 +7,5 @@ venv/
 *.pt
 .DS_Store
 src/.DS_Store
-
+dashboard.py
+old_main.py
