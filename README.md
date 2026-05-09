@@ -4,8 +4,6 @@
 This project uses YOLOv8 and OpenCV to detect and track vehicles in a parking lot video.  
 It determines parking spot occupancy and displays availability through a web-based dashboard.
 
----
-
 ## Features
 - Vehicle detection using YOLOv8  
 - Parking spot occupancy detection  
